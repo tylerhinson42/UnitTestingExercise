@@ -1,99 +1,90 @@
 using System;
-using System.Collections.Generic;
+using UnitTestingExercise;
 using Xunit;
 
 namespace UnitTestingExercise.Tests
 {
     public class UnitTests
     {
-        private IEnumerable<object> sum;
-
         [Theory]
+        [InlineData(1, 1, 1, 3)]
         [InlineData(0, 0, 0, 0)]
-#pragma warning disable xUnit1024 // Test methods cannot have overloads
-        public void Add(int num1, int num2, int num3, int expected)
-#pragma warning restore xUnit1024 // Test methods cannot have overloads
+        [InlineData(-1, -1, -1, -3)]
+        public void AddTester(int num1, int num2, int num3, int expected)
         {
             //Arrange
-            var newInt = new UnitTests();
+            var add = new UnitTestMethods();
             //Act
-            object v = Add(num1 + num2 + num3);
-            object actual = v;
+            var actual = add.Add(num1, num2, num3);
             //Assert
-            Assert.Equal(sum, actual);
-        }
+            actual.Equals(expected);
 
-#pragma warning disable xUnit1024 // Test methods cannot have overloads
-        private static object Add(int v)
-#pragma warning restore xUnit1024 // Test methods cannot have overloads
-        {
-            throw new NotImplementedException();
         }
 
         [Theory]
-        [InlineData(0, 0, 0)]
-#pragma warning disable xUnit1024 // Test methods cannot have overloads
+        [InlineData(1, 1, 0)]
+        [InlineData(1, 0, 1)]
+        [InlineData(0, 1, -1)]
         public void Subtract(int minuend, int subtrhend, int expected)
-#pragma warning restore xUnit1024 // Test methods cannot have overloads
         {
             //Arrange
-            var newInt = new UnitTests();
+            var sub = new UnitTestMethods();
             //Act
-            object actual = UnitTests.Subtract(minuend - subtrhend - expected);
+            var actual = sub.Subtract(minuend, subtrhend);
             //Assert
-            Assert.Equal(sum, actual);
-        }
-
-#pragma warning disable xUnit1024 // Test methods cannot have overloads
-        private static object Subtract(int v)
-#pragma warning restore xUnit1024 // Test methods cannot have overloads
-        {
-            throw new NotImplementedException();
+            actual.Equals(expected);
         }
 
         [Theory]
-        [InlineData(0, 0, 0)]
+        [InlineData(1, 1, 1)]
+        [InlineData(0, 1, 0)]
+        [InlineData(-1, 1, -1)]
         public void Multiply(int num1, int num2, int expected)
         {
             //Arrange
-
+            var mult = new UnitTestMethods();
             //Act
-
+            var actual = mult.Multiply(num1, num2);
             //Assert
+            actual.Equals(expected);
 
         }
 
         [Theory]
-        [InlineData(0, 0, 0)]
+        [InlineData(1, 1, 1)]
+        [InlineData(2, 2, 1)]
+        [InlineData(2, 1, 2)]
+        [InlineData(0, 1, 0)]
         public void Divide(int num1, int num2, int expected)
         {
             //Arrange
-
+            var div = new UnitTestMethods();
             //Act
-
+            var actual = div.Divide(num1, num2);
             //Assert
-
+            actual.Equals(expected);
         }
 
         [Fact]
-        public void YourMethodName()
+        public void IsNumberDivisibleByN()
         {
             //Arrange
-
+            var divN = new UnitTestMethods();
             //Act
-
+            var actual = divN.IsDivisibleByN(6, 2);
             //Assert
-
+            actual.Equals(true);
         }
 
         [Fact]
-        public void YourMethodName2()
+        public void IsEven()
         {
             //Arrange
-
+            var even = new UnitTestMethods();
             //Act
-
+            var actual = even.IsEven(2);
             //Assert
+            actual.Equals(true);
         }
     }
 }
